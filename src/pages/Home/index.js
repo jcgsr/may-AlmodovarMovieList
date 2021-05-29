@@ -10,6 +10,7 @@ import Elefante from "../../assets/Elefante.jpeg";
 import Destino from "../../assets/Destino.jpeg";
 import Vinhas from "../../assets/Vinhas.jpeg";
 import Desajustados from "../../assets/Desajustados.jpeg";
+import Oeste from "../../assets/Oeste.jpeg";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -85,6 +86,14 @@ export default function Home() {
 				"Enquanto está se divorciando, a bela ex-stripper Roslyn Taber acaba encontrando Gay Langland, um velho vaqueiro que se tornou jogador, e Guido Racanelli, um ex-aviador da Segunda Guerra Mundial. Os dois homens se apaixonam por Roslyn e os três decidem se mudar para a casa semi-acabada de Guido no deserto. Quando o grisalho ex-cavaleiro de rodeio Perce Howland chega, o quarteto começa uma empresa capturando cavalos selvagens.",
 			diretor: "John Huston",
 			foto: Desajustados,
+		},
+		{
+			id: 9,
+			nome: "Era uma vez no Oeste",
+			sinopse:
+				"Em virtude das terras que possuía serem futuramente a rota da estrada de ferro, um pai e todos os filhos são brutalmente assassinados por um matador profissional. Entretanto, ninguém sabia que ele, viúvo há seis anos, tinha se casado com uma outra mulher, de Nova Orleans, que passa ser a dona do local e recebe a proteção de um hábil atirador, que tem contas a ajustar com o frio matador.",
+			diretor: "Sergio Leone",
+			foto: Oeste,
 		},
 	]);
 	useEffect(() => {
