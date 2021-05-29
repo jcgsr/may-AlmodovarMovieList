@@ -12,29 +12,32 @@ import Button from "react-bootstrap/Button";
 import "./navbar.css";
 
 export default function Header() {
+  const [searchFilm, setSearchFilm] = useState("");
   return (
     <Navbar bg="danger" variant="dark" expand="lg" className="nav">
       <Container>
         <Link to="/">
           <Navbar.Brand>Almodóvar Cult Movie List</Navbar.Brand>
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto fav">
-            <Nav.Link>
-              <Link to="/favoritos">Favoritos</Link>
-            </Nav.Link>
-          </Nav>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Filme"
-              className="mr-2"
-              aria-label="Search"
-            />
-            <Button variant="info">Procurar</Button>
-          </Form>
-        </Navbar.Collapse>
+        {
+          // <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          // <Navbar.Collapse id="basic-navbar-nav">
+          // <Nav className="mr-auto">
+          //<Nav.Link>
+          // <Link to="/favoritos">Favoritos</Link>
+          // </Nav.Link>
+          // </Nav>
+          // <Form className="d-flex">
+          // <FormControl
+          // type="search"
+          // placeholder="Filme"
+          // className="mr-2"
+          // aria-label="Search"
+          // />
+          // <Button variant="info">Procurar</Button>
+          // </Form>
+          // </Navbar.Collapse>
+        }
       </Container>
     </Navbar>
   );

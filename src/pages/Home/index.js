@@ -9,8 +9,11 @@ import Purpura from "../../assets/Purpura.jpeg";
 import Elefante from "../../assets/Elefante.jpeg";
 import Destino from "../../assets/Destino.jpeg";
 import Vinhas from "../../assets/Vinhas.jpeg";
+import Desajustados from "../../assets/Desajustados.jpeg";
 
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -18,6 +21,7 @@ import Col from "react-bootstrap/Col";
 import "./home.css";
 
 export default function Home() {
+	const [searchFilm, setSearchFilm] = useState("");
 	const [filme, setFilme] = useState([
 		{
 			id: 1,
@@ -74,6 +78,14 @@ export default function Home() {
 			diretor: "John Ford",
 			foto: Vinhas,
 		},
+		{
+			id: 8,
+			nome: "Os Desajustados",
+			sinopse:
+				"Enquanto está se divorciando, a bela ex-stripper Roslyn Taber acaba encontrando Gay Langland, um velho vaqueiro que se tornou jogador, e Guido Racanelli, um ex-aviador da Segunda Guerra Mundial. Os dois homens se apaixonam por Roslyn e os três decidem se mudar para a casa semi-acabada de Guido no deserto. Quando o grisalho ex-cavaleiro de rodeio Perce Howland chega, o quarteto começa uma empresa capturando cavalos selvagens.",
+			diretor: "John Huston",
+			foto: Desajustados,
+		},
 	]);
 	useEffect(() => {
 		localStorage.setItem("filmes", JSON.stringify(filme));
@@ -97,38 +109,62 @@ export default function Home() {
 	return (
 		<Container>
 			<h1>Almodóvar Cult Movie List</h1>
+			<Form className="d-flex">
+				<FormControl
+					type="search"
+					placeholder="Filme"
+					className="mr-2"
+					aria-label="Search"
+					onChange={(event) => {
+						setSearchFilm(event.target.value);
+					}}
+				/>
+				<Button variant="info">Procurar</Button>
+			</Form>
 			<Row className="ctn">
 				<Col>
-					{filme.map((filme) => (
-						<li style={{ listStyle: "none" }} key={filme.id}>
-							<h2 className="mt-4">{filme.nome}</h2>
-							<img
-								className="mb-2 animate__animated animate__pulse"
-								src={filme.foto}
-							/>
-							<br />
-							<span style={{ color: "#ff0" }}>diretor: </span>
-							{filme.diretor}
-							<section className="mt-4">
-								<p className="sinopse" data-aos="fade-up">
-									<span style={{ color: "#ff0" }}>sinopse: </span>
-									{filme.sinopse}
-								</p>
-							</section>{" "}
-							<div data-aos="zoom-in" className="mb-4">
-								<a
-									className=""
-									target="blank"
-									href={`https://youtube.com/results?search_query=${filme.nome} Trailer`}
-								>
-									<Button variant="info" size="lg">
-										Trailer
-									</Button>
-								</a>
-							</div>
-							<hr style={{ color: "#ff0" }} />
-						</li>
-					))}
+					{filme
+						.filter((val) => {
+							if (searchFilm == "") {
+								return val;
+							} else if (
+								val.nome
+									.toLowerCase()
+									.includes(searchFilm.toLowerCase())
+							) {
+								return val;
+							}
+						})
+						.map((filme) => (
+							<li style={{ listStyle: "none" }} key={filme.id}>
+								<h2 className="mt-4">{filme.nome}</h2>
+								<img
+									className="mb-2 animate__animated animate__pulse"
+									src={filme.foto}
+								/>
+								<br />
+								<span style={{ color: "#ff0" }}>diretor: </span>
+								{filme.diretor}
+								<section className="mt-4">
+									<p className="sinopse" data-aos="zoom-in">
+										<span style={{ color: "#ff0" }}>sinopse: </span>
+										{filme.sinopse}
+									</p>
+								</section>{" "}
+								<div className="mb-4">
+									<a
+										className=""
+										target="blank"
+										href={`https://youtube.com/results?search_query=${filme.nome} Trailer`}
+									>
+										<Button variant="info" size="lg">
+											Trailer
+										</Button>
+									</a>
+								</div>
+								<hr style={{ color: "#ff0" }} />
+							</li>
+						))}
 				</Col>
 			</Row>
 		</Container>
