@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
+
+import { toast } from "react-toastify";
+
 import BrokeBack from "../../assets/BrokeBack.jpeg";
 import Woodstock from "../../assets/Woodstock.jpeg";
+import Schindler from "../../assets/Schindler.jpeg";
+import Purpura from "../../assets/Purpura.jpeg";
+import Elefante from "../../assets/Elefante.jpeg";
+import Destino from "../../assets/Destino.jpeg";
+import Vinhas from "../../assets/Vinhas.jpeg";
+
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+import "./home.css";
 
 export default function Home() {
-	const [filmes] = useState([
+	const [filme, setFilme] = useState([
 		{
 			id: 1,
 			nome: "O Segredo de Brokeback Mountain",
@@ -16,27 +31,110 @@ export default function Home() {
 			id: 2,
 			nome: "Aconteceu em Woodstock",
 			sinopse:
-				"Se há algo que não se pode dizer de Ang Lee, é que ele seja repetitivo. Da Inglaterra do século XIX (Razão e Sensibilidade) ao velho oeste americano (Cavalgada com o Diabo), de um super-herói dos quadrinhos (Hulk) ao wuxia (O Tigre e o Dragão), de um libelo gay (O Segredo de Brokeback Mountain) a um filme com cenas tórridas de sexo heterossexual (Desejo e Perigo), a diversidade tem sido marca registrada de sua carreira. Aconteceu em Woodstock, seu novo filme, mais uma vez traz algo de novo em sua filmografia.O interesse de Lee não é propriamente apresentar os bastidores do mítico festival de Woodstock, mas mostrar o que estava por trás dele na sociedade de momento. Seu foco é o lado humano, em especial os preconceitos e até que ponto eles podem ser relevados devido ao lado capitalista. Sim, o princípio de tudo, quando é definido o local onde Woodstock ocorrerá e sua organização às pressa...",
+				"No verão de 1969, no estado de Nova York, Elliot divide seu tempo entre Greenwich Village e o motel de seus pais nas montanhas, que está falindo. Quando organizadores do festival de Woodstock planejam o histórico evento musical de uma geração, Elliot se envolve e oferece o motel e terrenos na cidade para a organização do evento, mas sem imaginar a proporção gigantesca que o festival iria tomar.",
 			diretor: "Ang Lee",
 			foto: Woodstock,
 		},
+		{
+			id: 3,
+			nome: "A Lista de Schindler",
+			sinopse:
+				"O alemão Oskar Schindler viu na mão de obra judia uma solução barata e viável para lucrar com negócios durante a guerra. Com sua forte influência dentro do partido nazista, foi fácil conseguir as autorizações e abrir uma fábrica. O que poderia parecer uma atitude de um homem não muito bondoso, transformou-se em um dos maiores casos de amor à vida da História, pois este alemão abdicou de toda sua fortuna para salvar a vida de mais de mil judeus em plena luta contra o extermínio alemão.",
+			diretor: "Steven Spielberg",
+			foto: Schindler,
+		},
+		{
+			id: 4,
+			nome: "A Cor Púrpura",
+			sinopse:
+				"Georgia, 1909. Em uma pequena cidade Celie (Whoopi Goldberg), uma jovem com apenas 14 anos que foi violentada pelo pai, se torna mãe de duas crianças. Além de perder a capacidade de procriar, Celie imediatamente é separada dos filhos e da única pessoa no mundo que a ama, sua irmã, e é doada a 'Mister' (Danny Glover), que a trata simultaneamente como escrava e companheira. Grande parte da brutalidade de Mister provêm por alimentar uma forte paixão por Shug Avery (Margaret Avery), uma sensual cantora de blues. Celie fica muito solitária e compartilha sua tristeza em cartas (a única forma de manter a sanidade em um mundo onde poucos a ouvem), primeiramente com Deus e depois com a irmã Nettie (Akosua Busia), missionária na África. Mas quando Shug, aliada à forte Sofia (Oprah Winfrey), esposa de Harpo (Willard E. Pugh), filho de Mister, entram na sua vida, Celie revela seu espírito brilhante, ganhando consciência do seu valor e das possibilidades que o mundo lhe oferece.",
+			foto: Purpura,
+		},
+		{
+			id: 5,
+			nome: "O Homem Elefante",
+			sinopse:
+				"John Merrick nasceu desfigurado e parecia estar condenado a uma triste existência como atração de um show de aberrações. Porém, um cirurgião londrino o introduziu à sociedade. Apesar de suas dolorosas experiências, Merrick é gentil e inteligente e se torna convidado frequente nos salões vitorianos, mas precisa cobrir totalmente as feições deformadas.",
+			diretor: "David Lynch",
+			foto: Elefante,
+		},
+		{
+			id: 6,
+			nome: "Marcas do Destino",
+			sinopse:
+				"Rocky Dennis (Eric Stoltz) é um adolescente inteligente, bem-humorado e extrovertido que sofre de uma rara deformidade facial. Rusty (Cher) luta para que seu filho seja aceito na escola pública, já que ele pode provar que é competente para isso. Mesmo enfrentando discriminação, Rocky encontra suporte em sua família e também se apaixona pela primeira vez.",
+			diretor: "Peter Bogdanovich",
+			foto: Destino,
+		},
+		{
+			id: 7,
+			nome: "As Vinhas da Ira",
+			sinopse:
+				"O clã Joad está à procura de uma vida melhor na Califórnia. Depois que sua seca fazenda é apreendida pelo banco, a família, liderada pelo filho Tom (Henry Fonda) recém libertado condicionalmente, carrega um caminhão e vai para o Oeste. Na estrada, assolada por dificuldades, os Joad encontram dezenas de outras famílias que fazem o mesmo trajeto e têm o mesmo sonho. Uma vez na Califórnia, no entanto, os Joad logo percebem que a terra prometida não é bem o que eles esperavam.",
+			diretor: "John Ford",
+			foto: Vinhas,
+		},
 	]);
 	useEffect(() => {
-		localStorage.setItem("filmes", JSON.stringify(filmes));
-	}, [filmes]);
+		localStorage.setItem("filmes", JSON.stringify(filme));
+	}, [filme]);
+	function salvarFilme() {
+		const minhaLista = localStorage.getItem("filmes");
+		let filmesSalvos = JSON.parse(minhaLista) || [];
+
+		// const temFilmes = filmesSalvos.some(
+		// 	(filmeSalvo) => filmeSalvo.id === filme.id
+		// );
+		filmesSalvos.push(filme);
+		localStorage.setItem("filmes", JSON.stringify(filmesSalvos));
+		let id = filmesSalvos.id;
+		console.log(id);
+		setFilme([...filme, []]);
+		filme.push(filmesSalvos);
+		console.log(filme);
+		toast.success("Filme salvo!");
+	}
 	return (
-		<div className="has-background-info has-text-centered">
-			<h1 className="has-text-white is-size-1">Almodovar Movie List</h1>
-			<div className="">
-				{filmes.map((filme) => (
-					<li style={{ listStyle: "none" }} key={filme.id}>
-						<h2 className="is-size-3">{filme.nome}</h2>
-						<img src={filme.foto} />
-						<br />
-						diretor: {filme.diretor} <br /> sinopse: {filme.sinopse}
-					</li>
-				))}
-			</div>
-		</div>
+		<Container>
+			<h1>Almodóvar Cult Movie List</h1>
+			<Row className="ctn">
+				<Col>
+					{filme.map((filme) => (
+						<li style={{ listStyle: "none" }} key={filme.id}>
+							<h2 className="mt-4">{filme.nome}</h2>
+							<img
+								className="mb-2 animate__animated animate__pulse"
+								src={filme.foto}
+							/>
+							<br />
+							<span style={{ color: "#ff0" }}>diretor: </span>
+							{filme.diretor}
+							<section className="mt-4">
+								<p className="sinopse" data-aos="fade-up">
+									<span style={{ color: "#ff0" }}>sinopse: </span>
+									{filme.sinopse}
+								</p>
+							</section>{" "}
+							<div data-aos="zoom-in" className="mb-4">
+								<a
+									className=""
+									target="blank"
+									href={`https://youtube.com/results?search_query=${filme.nome} Trailer`}
+								>
+									<Button variant="info" size="lg">
+										Trailer
+									</Button>
+								</a>
+							</div>
+							<hr style={{ color: "#ff0" }} />
+						</li>
+					))}
+				</Col>
+			</Row>
+		</Container>
 	);
 }
+
+// <Button variant="danger" size="lg" onClick={salvarFilme}>
+// 	Salvar
+// </Button>;

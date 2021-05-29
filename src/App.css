@@ -1,5 +1,8 @@
-* {
+body,
+html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background: blue !important;
+  color: #fff !important;
 }

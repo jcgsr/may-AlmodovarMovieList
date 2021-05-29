@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
+
+import "./navbar.css";
+
+export default function Header() {
   return (
-    <nav
-      className="navbar has-background-danger has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="navbar-brand ">
+    <Navbar bg="danger" variant="dark" expand="lg" className="nav">
+      <Container>
         <Link to="/">
-          <h1 className="navbar-item has-text-white">Almodovar Movie List</h1>
+          <Navbar.Brand>Almodóvar Cult Movie List</Navbar.Brand>
         </Link>
-      </div>
-    </nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto fav">
+            <Nav.Link>
+              <Link to="/favoritos">Favoritos</Link>
+            </Nav.Link>
+          </Nav>
+          <Form className="d-flex">
+            <FormControl
+              type="search"
+              placeholder="Filme"
+              className="mr-2"
+              aria-label="Search"
+            />
+            <Button variant="info">Procurar</Button>
+          </Form>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }

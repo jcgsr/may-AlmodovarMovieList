@@ -1,0 +1,21 @@
+h1 {
+	text-align: center;
+	padding: 2rem;
+	background-color: yellow;
+	color: #f00;
+	margin-bottom: 1rem;
+}
+
+.ctn {
+	text-align: center;
+}
+
+.ctn p {
+	width: 70%;
+	margin: 0 auto;
+	padding-bottom: 1rem;
+}
+
+.ctn hr {
+	border-top: 1px solid red;
+}
