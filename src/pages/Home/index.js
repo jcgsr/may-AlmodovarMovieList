@@ -12,19 +12,30 @@ import FormControl from "react-bootstrap/FormControl";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Spinner from "react-bootstrap/Spinner";
 
 import "./home.css";
 
 export default function Home() {
   const [searchFilm, setSearchFilm] = useState("");
   const [filmes, setFilmes] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function loadFilmes() {
       const response = await api.get(".json");
       setFilmes(response.data);
+      setLoading(false);
     }
     loadFilmes();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="spinner">
+        <Spinner animation="border" />
+      </div>
+    );
+  }
 
   return (
     <Container>
