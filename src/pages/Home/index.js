@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
-
 import api from "../../services/api";
 
-import { toast } from "react-toastify";
+import { Link, animateScroll as scroll } from "react-scroll";
+
+import { BsSearch } from "react-icons/bs";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -45,6 +45,7 @@ export default function Home() {
           type="search"
           placeholder="Filme"
           className="mr-2"
+          id="search_movie"
           aria-label="Search"
           onChange={(event) => {
             setSearchFilm(event.target.value);
@@ -61,10 +62,20 @@ export default function Home() {
                 val.filme.toLowerCase().includes(searchFilm.toLowerCase())
               ) {
                 return val;
+              } else if (
+                val.filme
+                  .toLowerCase()
+                  .includes(searchFilm.toLowerCase() != filmes.filme)
+              ) {
+                return (
+                  <div className="no_movie">
+                    <p>No movie found</p>
+                  </div>
+                );
               }
             })
             .map((filme) => (
-              <li style={{ listStyle: "none" }} key={filme.id}>
+              <li style={{ listStyle: "none" }} key={filme.filme}>
                 <h2 className="mt-4">{filme.filme}</h2>
                 <img
                   data-aos="zoom-in"
@@ -94,12 +105,20 @@ export default function Home() {
                 <hr style={{ color: "#ff0" }} />
               </li>
             ))}
+          <Button className="search-icon" variant="secondary">
+            <Link
+              activeClass="active"
+              to="search_movie"
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+            >
+              <BsSearch size={24} />
+            </Link>
+          </Button>
         </Col>
       </Row>
     </Container>
   );
 }
-
-// <Button variant="danger" size="lg" onClick={salvarFilme}>
-// 	Salvar
-// </Button>;
