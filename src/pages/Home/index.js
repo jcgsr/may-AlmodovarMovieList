@@ -5,6 +5,7 @@ import api from "../../services/api";
 import { Link, animateScroll as scroll } from "react-scroll";
 
 import { BsSearch } from "react-icons/bs";
+import { FaWhatsapp } from "react-icons/fa";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -20,6 +21,8 @@ export default function Home() {
   const [searchFilm, setSearchFilm] = useState("");
   const [filmes, setFilmes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const whatsapp =
+    "https://wa.me/5579988284730/?text=Gostaria%20de%20sugerir%20um%20filme%20cult%20para%20a%20lista%20de%20Almodóvar%20!";
   useEffect(() => {
     async function loadFilmes() {
       const response = await api.get(".json");
@@ -40,11 +43,14 @@ export default function Home() {
   return (
     <Container>
       <h1>Almodóvar Cult Movie List</h1>
+
       <Form className="d-flex">
         <FormControl
           type="search"
           placeholder="Filme"
           className="mr-2"
+          autoFocus
+          value={searchFilm}
           id="search_movie"
           aria-label="Search"
           onChange={(event) => {
@@ -62,16 +68,6 @@ export default function Home() {
                 val.filme.toLowerCase().includes(searchFilm.toLowerCase())
               ) {
                 return val;
-              } else if (
-                val.filme
-                  .toLowerCase()
-                  .includes(searchFilm.toLowerCase() != filmes.filme)
-              ) {
-                return (
-                  <div className="no_movie">
-                    <p>No movie found</p>
-                  </div>
-                );
               }
             })
             .map((filme) => (
@@ -105,6 +101,20 @@ export default function Home() {
                 <hr style={{ color: "#ff0" }} />
               </li>
             ))}
+          {searchFilm !== filmes && (
+            <div className="no-movie">
+              <h2 className="mt-4 mb-4">{searchFilm}</h2>
+              <h3>não está nessa lista... 😔</h3>
+              <h3>Deseja incluí-lo?!</h3>
+              <h4>Entre em contato pelo</h4>
+              <a href={whatsapp}>
+                <Button className="ml-2" size="lg">
+                  <FaWhatsapp size={24} />
+                </Button>
+              </a>
+            </div>
+          )}
+
           <Button className="search-icon" variant="secondary">
             <Link
               activeClass="active"

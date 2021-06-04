@@ -39,5 +39,15 @@ h1 {
   right: 0;
   position: fixed;
 	margin: 1rem;
+}
 
+.no-movie {
+	margin-bottom: 2rem;
+}
+
+.no-movie h2 {
+	background: #f00;
+	border-radius: 5px;
+	padding: 1rem;
+	/* width: 70%; */
 }
