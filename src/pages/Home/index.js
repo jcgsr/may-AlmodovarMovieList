@@ -104,7 +104,7 @@ export default function Home() {
           {searchFilm !== filmes && (
             <div className="no-movie">
               <h2 className="mt-4 mb-4">{searchFilm}</h2>
-              <h3>não está nessa lista... 😔</h3>
+              <h3>não está nessa lista?! 😲</h3>
               <h3>Deseja incluí-lo?!</h3>
               <h4>Entre em contato pelo</h4>
               <a href={whatsapp}>
